@@ -78,7 +78,7 @@
              * @param $message
              */
             public function sayPublic ($message) {
-                $this->_client->say($message);
+                $this->_client->say($message , $this->getChannel());
             }
 
             /**
@@ -87,7 +87,7 @@
              */
             public function sayPrivate ($user, $message) {
                 $raw = $user . ': ' . $message;
-                $this->sayPublic($raw);
+                $this->_client->say($raw, $user);
             }
 
             /**
