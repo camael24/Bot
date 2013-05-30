@@ -78,7 +78,18 @@
                         $this->addLog($this->_bot->getUser(), 'Change subject of ' . $argument);
                         $this->_bot->sayPublic('Change subject ' . $old . ' by ' . $this->_logSubject);
                         break;
+                    case 'reset':
+                        $this->_log        = array();
+                        $this->_inProgress = false;
+                        $this->_logAuthor  = null;
+                        break;
                     case 'save':
+                        if($this->_logAuthor !== $user) {
+                            $this->_bot->sayPrivate($user, 'You can\'t save this log , you are not the author');
+
+                            return;
+                        }
+
                         $input = '';
                         foreach ($this->_log as $log)
                             $input .= $log . "\n";
